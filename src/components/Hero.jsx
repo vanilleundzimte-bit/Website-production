@@ -1,6 +1,7 @@
+import { Link } from 'react-router';
 import { Leaf, Cake, FlowerLotus } from '@phosphor-icons/react';
 
-export default function VZHero({ onShop, onCustom }) {
+export default function VZHero() {
   return (
     <section className="vz-hero">
       <img src="/assets/pattern.png" alt="" className="vz-hero-pattern" width="530" height="370" />
@@ -17,13 +18,15 @@ export default function VZHero({ onShop, onCustom }) {
           <p className="vz-hero-lede">
             Every cake, cookie and creation here is gluten-free — without ever sacrificing taste, texture, or joy.
           </p>
+          {/* Real links, not buttons calling navigate(): the two primary calls to
+              action are now crawlable and can be opened in a new tab. */}
           <div className="vz-hero-cta">
-            <button className="vz-btn vz-btn-primary" onClick={onShop}>
+            <Link className="vz-btn vz-btn-primary" to="/shop">
               Browse the collection
-            </button>
-            <button className="vz-btn vz-btn-ghost" onClick={onCustom}>
+            </Link>
+            <Link className="vz-btn vz-btn-ghost" to="/custom-orders">
               Custom orders <span aria-hidden>→</span>
-            </button>
+            </Link>
           </div>
           <div className="vz-hero-marks">
             <span><Leaf size={18} /> 100% plant-based</span>
@@ -32,7 +35,7 @@ export default function VZHero({ onShop, onCustom }) {
           </div>
         </div>
         <div className="vz-hero-art">
-          <img src="/assets/logo-badge.png" alt="vanille & zimté" className="vz-hero-badge" width="1256" height="1256" />
+          <img src="/assets/logo-badge.jpg" alt="vanille & zimté" className="vz-hero-badge" width="1256" height="1256" />
         </div>
       </div>
     </section>

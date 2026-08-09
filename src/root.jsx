@@ -64,7 +64,7 @@ export function meta() {
 }
 
 function AppShell() {
-  const { showCart, setShowCart, cart, removeFromCart, updateQty, enquireOnWhatsApp } = useCart();
+  const { showCart, setShowCart, cart, removeFromCart, updateQty, enquiryUrl } = useCart();
   return (
     <>
       <VZHeader />
@@ -78,7 +78,7 @@ function AppShell() {
           onClose={() => setShowCart(false)}
           onRemove={removeFromCart}
           onUpdateQty={updateQty}
-          onEnquire={enquireOnWhatsApp}
+          enquiryUrl={enquiryUrl}
         />
       )}
     </>

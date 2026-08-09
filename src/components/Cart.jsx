@@ -1,8 +1,10 @@
 import { X, ShoppingBag } from '@phosphor-icons/react';
 import { getFixedWeight } from '../lib/productMeta';
+import useScrollLock from '../lib/useScrollLock';
 import QuantityStepper from './QuantityStepper';
 
-export default function VZCart({ items, onClose, onRemove, onUpdateQty, onEnquire }) {
+export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryUrl }) {
+  useScrollLock();
   const totalCount = items.reduce((sum, item) => sum + item.qty, 0);
 
   return (
@@ -62,13 +64,20 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, onEnquir
               ? 'We’ll confirm availability, delivery and pricing over WhatsApp.'
               : `${totalCount} item${totalCount > 1 ? 's' : ''} in your box — we’ll confirm availability, delivery and pricing over WhatsApp.`}
           </p>
-          <button
-            className="vz-btn vz-btn-primary vz-btn-block"
-            disabled={items.length === 0}
-            onClick={onEnquire}
-          >
-            Continue on WhatsApp
-          </button>
+          {enquiryUrl ? (
+            <a
+              className="vz-btn vz-btn-primary vz-btn-block"
+              href={enquiryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Continue on WhatsApp
+            </a>
+          ) : (
+            <button className="vz-btn vz-btn-primary vz-btn-block" disabled>
+              Continue on WhatsApp
+            </button>
+          )}
         </footer>
       </aside>
     </div>

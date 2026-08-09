@@ -2,19 +2,20 @@ import { Link } from 'react-router';
 import { InstagramLogo, EnvelopeSimple, WhatsappLogo } from '@phosphor-icons/react';
 import { WHATSAPP_NUMBER } from '../lib/whatsapp';
 import { BUSINESS } from '../lib/siteConfig';
+import { VZ_DATA } from '../data/products';
+
+// Built from the catalog instead of hand-listed: this column used to advertise
+// Birthday Cakes, Cheesecakes, Tres Leches and Namkeens, none of which exist as
+// products — all six links dumped you on an unfiltered /shop.
+const CATEGORY_ITEMS = [
+  { label: 'Everything', to: '/shop' },
+  ...VZ_DATA.categories
+    .filter(c => c !== 'All')
+    .map(c => ({ label: `${c}s`, to: `/shop?cat=${encodeURIComponent(c)}` })),
+];
 
 const COLS = [
-  {
-    h: 'The Collection',
-    items: [
-      { label: 'Tea Cakes', to: '/shop' },
-      { label: 'Birthday Cakes', to: '/shop' },
-      { label: 'Cookies', to: '/shop' },
-      { label: 'Cheesecakes', to: '/shop' },
-      { label: 'Tres Leches', to: '/shop' },
-      { label: 'Namkeens', to: '/shop' },
-    ],
-  },
+  { h: 'The Collection', items: CATEGORY_ITEMS },
   {
     h: 'Visit',
     items: [

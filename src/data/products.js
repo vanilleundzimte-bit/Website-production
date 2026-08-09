@@ -10,7 +10,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-cream-2)",
-      "photo": "/products/marble-millet-teacake.png"
+      "photo": "/products/marble-millet-teacake.jpg"
     },
     {
       "id": "baklava-bundt-millet-cake",
@@ -21,7 +21,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-rose-soft)",
-      "photo": "/products/baklava-bundt-millet-cake.png"
+      "photo": "/products/baklava-bundt-millet-cake.jpg"
     },
     {
       "id": "mocha-walnut-millet-cake",
@@ -32,7 +32,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-rose-soft)",
-      "photo": "/products/mocha-walnut-millet-cake.png"
+      "photo": "/products/mocha-walnut-millet-cake.jpg"
     },
     {
       "id": "pineapple-upside-down-millet-te",
@@ -43,7 +43,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-vanilla)",
-      "photo": "/products/pineapple-upside-down-millet-te.png"
+      "photo": "/products/pineapple-upside-down-millet-te.jpg"
     },
     {
       "id": "chocolate-butter-millet-teacake",
@@ -54,7 +54,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-cream-2)",
-      "photo": "/products/chocolate-butter-millet-teacake.png"
+      "photo": "/products/chocolate-butter-millet-teacake.jpg"
     },
     {
       "id": "vanilla-butter-millet-teacake",
@@ -65,7 +65,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-rose-soft)",
-      "photo": "/products/vanilla-butter-millet-teacake.png"
+      "photo": "/products/vanilla-butter-millet-teacake.jpg"
     },
     {
       "id": "millet-nankhatai",
@@ -76,7 +76,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-cinnamon-soft)",
-      "photo": "/products/millet-nankhatai.png"
+      "photo": "/products/millet-nankhatai.jpg"
     },
     {
       "id": "rajgira-cookies",
@@ -87,7 +87,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-cream-2)",
-      "photo": "/products/rajgira-cookies.png"
+      "photo": "/products/rajgira-cookies.jpg"
     },
     {
       "id": "ny-style-millet-cookie",
@@ -98,7 +98,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-vanilla)",
-      "photo": "/products/ny-style-millet-cookie.png"
+      "photo": "/products/ny-style-millet-cookie.jpg"
     },
     {
       "id": "oats-cookies",
@@ -109,7 +109,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-rose-soft)",
-      "photo": "/products/oats-cookies.png"
+      "photo": "/products/oats-cookies.jpg"
     },
     {
       "id": "mini-butter-millet-cookies",
@@ -120,7 +120,7 @@ export const VZ_DATA = {
         "GF"
       ],
       "color": "var(--vz-vanilla)",
-      "photo": "/products/mini-butter-millet-cookies.png"
+      "photo": "/products/mini-butter-millet-cookies.jpg"
     }
   ],
   "categories": [

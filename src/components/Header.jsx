@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router';
-import { MagnifyingGlass, User, ShoppingBag, List, X } from '@phosphor-icons/react';
+import { ShoppingBag, List, X } from '@phosphor-icons/react';
 import { useCart } from '../lib/CartContext';
 
 const MARQUEE_ITEMS = ['GLUTEN-FREE', 'NOIDA-BAKED', 'PAN DELHI NCR DELIVERY'];
@@ -53,14 +53,15 @@ export default function VZHeader() {
         <nav className="vz-nav">
           {NAV_LINKS.map(link => <HeaderNavLink key={link.to} {...link} />)}
         </nav>
+        {/* The search and account buttons that used to sit here did nothing when
+            tapped — there is no search index and no accounts. Two of the four
+            targets in the mobile header were dead, so they're gone. */}
         <div className="vz-header-actions">
-          <button className="vz-icon-btn" aria-label="Search">
-            <MagnifyingGlass size={19} />
-          </button>
-          <button className="vz-icon-btn" aria-label="Account">
-            <User size={19} />
-          </button>
-          <button className="vz-icon-btn" onClick={() => setShowCart(true)} aria-label="Your box">
+          <button
+            className="vz-icon-btn"
+            onClick={() => setShowCart(true)}
+            aria-label={cartCount > 0 ? `Your box, ${cartCount} item${cartCount > 1 ? 's' : ''}` : 'Your box'}
+          >
             <ShoppingBag size={19} />
             {cartCount > 0 && <span className="vz-cart-badge">{cartCount}</span>}
           </button>
@@ -69,12 +70,13 @@ export default function VZHeader() {
             onClick={() => setMenuOpen(o => !o)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls="vz-mobile-nav"
           >
             {menuOpen ? <X size={20} /> : <List size={20} />}
           </button>
         </div>
         {menuOpen && (
-          <nav className="vz-mobile-nav">
+          <nav className="vz-mobile-nav" id="vz-mobile-nav">
             {NAV_LINKS.map(link => (
               <HeaderNavLink key={link.to} {...link} onClick={() => setMenuOpen(false)} />
             ))}

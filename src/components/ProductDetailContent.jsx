@@ -4,7 +4,10 @@ import { getFixedWeight } from '../lib/productMeta';
 import Checkbox from './Checkbox';
 import QuantityStepper from './QuantityStepper';
 
-export default function ProductDetailContent({ product, onAdd, longDescription }) {
+// titleTag defaults to h1 for the standalone product page, where this is the page's
+// only heading. The modal passes h2 — on /shop the collection already owns the h1,
+// and opening a product used to put a second one on the page.
+export default function ProductDetailContent({ product, onAdd, longDescription, titleTag: TitleTag = 'h1' }) {
   const [qty, setQty] = useState(1);
   const [dairyFree, setDairyFree] = useState(false);
   const [notes, setNotes] = useState('');
@@ -14,7 +17,7 @@ export default function ProductDetailContent({ product, onAdd, longDescription }
   return (
     <div className="vz-modal-body">
       <span className="vz-eyebrow">{product.cat}</span>
-      <h1 className="vz-modal-title">{product.name}</h1>
+      <TitleTag className="vz-modal-title">{product.name}</TitleTag>
       <p className="vz-modal-blurb">{longDescription || product.blurb || ''}</p>
 
       <div className="vz-modal-tags">

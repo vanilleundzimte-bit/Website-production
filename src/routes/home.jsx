@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router';
+import { Link } from 'react-router';
 import VZHero from '../components/Hero';
 import VZCollection from '../components/ProductGrid';
 import VZBundlePromo from '../components/BundlePromo';
@@ -24,13 +24,12 @@ export function meta() {
 export default function HomeRoute() {
   const [openProduct, setOpenProduct] = useState(null);
   const { addToCart } = useCart();
-  const navigate = useNavigate();
 
   return (
     <>
-      <VZHero onShop={() => navigate('/shop')} onCustom={() => navigate('/custom-orders')} />
+      <VZHero />
       <VZCollection products={VZ_DATA.products} onOpen={setOpenProduct} />
-      <VZBundlePromo onShop={() => navigate('/shop')} />
+      <VZBundlePromo />
 
       <section className="vz-section vz-section-tonal">
         <div className="vz-section-head">

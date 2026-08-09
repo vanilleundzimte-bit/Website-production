@@ -1,6 +1,7 @@
+import { Link } from 'react-router';
 import { ArrowRight } from '@phosphor-icons/react';
 
-export default function VZBundlePromo({ onShop }) {
+export default function VZBundlePromo() {
   return (
     <section className="vz-bundle">
       <div className="vz-bundle-inner">
@@ -9,9 +10,9 @@ export default function VZBundlePromo({ onShop }) {
         <p className="vz-bundle-lede">
           Tell us how many pieces your celebration calls for and we'll help you build the box — tea cakes with cookies, cheesecake with namkeens, whatever the moment needs.
         </p>
-        <button className="vz-btn vz-btn-accent" onClick={onShop}>
+        <Link className="vz-btn vz-btn-accent" to="/shop">
           Start your box <ArrowRight size={14} />
-        </button>
+        </Link>
       </div>
     </section>
   );

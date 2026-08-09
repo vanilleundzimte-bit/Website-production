@@ -26,9 +26,12 @@ img { display: block; max-width: 100%; }
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 18px 32px; gap: 32px;
 }
+/* The logo and the nav links carry button resets because they used to be <button>s.
+   They're <Link>s now, so they also need the anchor underline removed — without it
+   the wordmark and every nav item render underlined. */
 .vz-logo {
   display: flex; align-items: center; gap: 10px;
-  background: none; border: none; padding: 0;
+  background: none; border: none; padding: 0; text-decoration: none;
   font-family: var(--vz-font-display); font-style: italic; font-weight: 600;
   color: var(--vz-brand); font-size: 22px;
 }
@@ -39,14 +42,18 @@ img { display: block; max-width: 100%; }
 .vz-nav-link {
   background: none; border: none; padding: 8px 14px; border-radius: 999px;
   font-family: var(--vz-font-body); font-size: 13px; font-weight: 500;
-  letter-spacing: 0.04em; color: var(--vz-fg);
+  letter-spacing: 0.04em; color: var(--vz-fg); text-decoration: none;
   transition: all var(--vz-dur-fast) var(--vz-ease-out);
 }
 .vz-nav-link:hover { color: var(--vz-cinnamon); }
 .vz-nav-link.is-active { background: var(--vz-vanilla); color: var(--vz-blue-ink); }
 
 .vz-header-actions { display: flex; gap: 4px; justify-self: end; }
-.vz-menu-toggle { display: none; }
+/* Needs to outrank .vz-icon-btn's `display: inline-flex`, which is declared below it
+   at equal specificity — as a plain `.vz-menu-toggle` this lost on source order and
+   the hamburger sat visible next to the full desktop nav, opening a dropdown that
+   CSS then kept hidden. A visible button that does nothing. */
+.vz-header-actions .vz-menu-toggle { display: none; }
 .vz-mobile-nav { display: none; }
 .vz-icon-btn {
   width: 38px; height: 38px; border-radius: 50%;
@@ -117,8 +124,15 @@ img { display: block; max-width: 100%; }
 .vz-hero-marks svg { color: var(--vz-cinnamon); }
 
 .vz-hero-art { display: flex; justify-content: center; }
+/* The badge is a circular logo. As a PNG its corners were transparent; the JPEG
+   replacement has them filled flat grey, which would sit as a grey square on the
+   cream hero. The artwork's disc is inscribed edge-to-edge, so clipping to a circle
+   just inside its rim removes the grey without touching the design — and because
+   drop-shadow works off the clipped alpha, the shadow still follows the circle
+   instead of boxing it. */
 .vz-hero-badge {
   width: 380px; max-width: 100%; height: auto;
+  clip-path: circle(49.6% at 50% 50%);
   filter: drop-shadow(var(--vz-shadow-md));
 }
 
@@ -288,8 +302,18 @@ img { display: block; max-width: 100%; }
 }
 .vz-form-extras { display: flex; gap: 22px; flex-wrap: wrap; margin-bottom: 26px; }
 .vz-check {
+  position: relative;
   display: inline-flex; align-items: center; gap: 9px;
   font-size: 13px; cursor: pointer; color: var(--vz-cream);
+  min-height: 44px;
+}
+/* Visually hidden but still focusable — the tick itself is the painted control. */
+.vz-check-input {
+  position: absolute; width: 1px; height: 1px;
+  opacity: 0; margin: 0; pointer-events: none;
+}
+.vz-check-input:focus-visible + .vz-checkbox {
+  outline: 2px solid var(--vz-cinnamon); outline-offset: 2px;
 }
 .vz-checkbox {
   width: 18px; height: 18px; border-radius: 5px;
@@ -482,9 +506,16 @@ img { display: block; max-width: 100%; }
   background: var(--vz-cream); color: var(--vz-blue-ink); opacity: 0.35;
   display: flex; align-items: center; justify-content: center;
 }
-.vz-footer-col ul { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.vz-footer-col li { font-size: 13.5px; color: var(--vz-fg); cursor: pointer; }
-.vz-footer-col li:hover { color: var(--vz-cinnamon); }
+.vz-footer-col ul { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.vz-footer-col li { font-size: 13.5px; color: var(--vz-fg); }
+/* Nothing targeted these anchors before, so every footer link rendered in the
+   browser default #0000EE underline — ten stock blue links under a cream footer. */
+.vz-footer-col a {
+  color: inherit; text-decoration: none;
+  display: inline-flex; align-items: center; min-height: 44px;
+  transition: color var(--vz-dur-fast) var(--vz-ease-out);
+}
+.vz-footer-col a:hover { color: var(--vz-cinnamon); }
 .vz-footer-foot {
   max-width: 1240px; margin: 0 auto;
   display: flex; justify-content: space-between; align-items: center;
@@ -511,7 +542,7 @@ img { display: block; max-width: 100%; }
 .vz-card-quickadd {
   position: absolute; left: 12px; right: 12px; bottom: 12px;
   background: rgba(255,247,239,0.94); color: var(--vz-blue-ink);
-  border: none; border-radius: 999px; padding: 10px 14px;
+  border: none; border-radius: 999px; padding: 12px 14px; min-height: 44px;
   font-family: var(--vz-font-body); font-size: 12px; font-weight: 600;
   letter-spacing: 0.04em; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   opacity: 0; transform: translateY(6px); pointer-events: none;
@@ -520,6 +551,12 @@ img { display: block; max-width: 100%; }
 }
 .vz-card:hover .vz-card-quickadd, .vz-card:focus-within .vz-card-quickadd {
   opacity: 1; transform: translateY(0); pointer-events: auto;
+}
+/* Touch devices have no hover, so the reveal above never fired — the most prominent
+   "Add to box" button on every card sat at opacity 0 with pointer-events: none,
+   invisible and untappable for every phone visitor. Show it outright there. */
+@media (hover: none) {
+  .vz-card-quickadd { opacity: 1; transform: none; pointer-events: auto; }
 }
 
 /* ---------- PROCESS STRIP (story) ---------- */
@@ -600,7 +637,7 @@ img { display: block; max-width: 100%; }
   .vz-modal-art { min-height: 240px; }
   .vz-footer-grid { grid-template-columns: 1fr 1fr; }
   .vz-nav { display: none; }
-  .vz-menu-toggle { display: inline-flex; }
+  .vz-header-actions .vz-menu-toggle { display: inline-flex; }
   .vz-newsletter-field { min-width: 220px; }
 
   .vz-header-inner {
@@ -643,7 +680,53 @@ img { display: block; max-width: 100%; }
   .vz-values { grid-template-columns: 1fr; }
   .vz-logo { font-size: 17px; gap: 8px; }
   .vz-logo img { height: 30px; }
-  .vz-icon-btn { width: 34px; height: 34px; }
+}
+
+/* ---------- TOUCH / MOBILE VIEWPORT CORRECTIONS ---------- */
+
+/* iOS Safari zooms the whole page in when a focused field is under 16px and never
+   zooms back out, which left the enquiry forms half off-screen mid-typing. */
+@media (max-width: 960px) {
+  .vz-field input, .vz-field select, .vz-field textarea,
+  .vz-newsletter-field input {
+    font-size: 16px;
+  }
+}
+
+/* 44px is the smallest reliable touch target; the header controls were 38px, and
+   34px on small phones. Pointer-based devices keep the tighter original sizing. */
+@media (hover: none) {
+  .vz-icon-btn { width: 44px; height: 44px; }
+  .vz-social a { width: 44px; height: 44px; }
+  .vz-stepper-btn { width: 36px; height: 36px; }
+  .vz-stepper { gap: 12px; padding: 5px 7px; }
+  .vz-link-btn { padding: 12px 0; }
+  .vz-chip { padding: 11px 18px; }
+  .vz-modal-close { width: 44px; height: 44px; }
+  .vz-breadcrumbs a { padding: 6px 0; }
+  .vz-field input, .vz-field select, .vz-newsletter-field input { min-height: 44px; }
+}
+
+/* 100vh on a phone measures the viewport *behind* the browser chrome, so the modal
+   and the cart drawer both ran taller than the screen and buried their own CTAs
+   under the address bar. dvh tracks the actually-visible area. */
+@supports (height: 100dvh) {
+  .vz-modal-bg, .vz-cart-pane { height: 100dvh; }
+}
+@media (max-width: 960px) {
+  .vz-modal { max-height: 100%; }
+}
+
+/* Keep a flick inside the overlay from chaining to the page behind it. */
+.vz-modal-body, .vz-cart-list { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+
+/* Anchors styled as buttons need the same box as the <button> version. */
+a.vz-btn { text-decoration: none; }
+
+/* There was no visible focus state anywhere, so keyboard users navigated blind. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--vz-cinnamon);
+  outline-offset: 2px;
 }
 
 /* ---------- BREADCRUMBS ---------- */

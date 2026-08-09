@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router';
 import { ArrowRight } from '@phosphor-icons/react';
 import { VZ_DATA } from '../data/products';
 
@@ -43,8 +43,24 @@ function VZProductCard({ product, onOpen }) {
 }
 
 export default function VZCollection({ products, onOpen, headingTag: HeadingTag = 'h2' }) {
-  const [cat, setCat] = useState('All');
   const cats = VZ_DATA.categories;
+  // The active filter lives in the URL rather than local state so /shop?cat=Cookie
+  // is shareable and the footer's category links land on a filtered collection —
+  // an unrecognised value just falls back to showing everything.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requested = searchParams.get('cat');
+
+  // These pages are prerendered without a query string, so the first client render
+  // has to paint the same unfiltered grid the HTML already contains — applying
+  // ?cat= before hydration finishes is a mismatch React resolves by throwing away
+  // the prerendered markup and re-rendering the whole page.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+
+  const cat = hydrated && cats.includes(requested) ? requested : 'All';
+  const setCat = next =>
+    setSearchParams(next === 'All' ? {} : { cat: next }, { replace: true, preventScrollReset: true });
+
   const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
 
   return (
