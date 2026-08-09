@@ -1,0 +1,32 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: *
+Allow: /
+
+# Blocking Google-Extended (training-only) is a separate, optional decision
+# from allowing retrieval/citation bots above — left allowed here to
+# maximize visibility for a new site. Revisit once established.
+
+Sitemap: https://vanillezimte.com/sitemap.xml
