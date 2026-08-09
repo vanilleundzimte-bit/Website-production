@@ -714,7 +714,31 @@ img { display: block; max-width: 100%; }
   .vz-modal-bg, .vz-cart-pane { height: 100dvh; }
 }
 @media (max-width: 960px) {
-  .vz-modal { max-height: 100%; }
+  .vz-modal {
+    max-height: 100%;
+    /* Capping the modal is not enough on its own. Grid `auto` rows size to their
+       content and, unlike flex items, do not shrink to fit a constrained container
+       — so the body row kept its full 689px while the modal was capped at 819px,
+       and overflow:hidden silently clipped "Add to box" off the bottom. The body
+       never became scrollable, so there was no way to reach it.
+       minmax(0, 1fr) lets that row shrink below its content and hand scrolling to
+       .vz-modal-body's overflow-y. */
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .vz-modal-art { min-height: 200px; }
+
+  /* Keep the primary action on screen while the details scroll behind it, so the
+     CTA is never something the customer has to go looking for. */
+  .vz-modal-foot {
+    position: sticky; bottom: 0;
+    background: var(--vz-cream);
+    margin-top: auto;
+  }
+}
+/* Short viewports (landscape, or a phone with the browser chrome showing) need the
+   photo to give up more room than the body. */
+@media (max-width: 960px) and (max-height: 700px) {
+  .vz-modal-art { min-height: 140px; }
 }
 
 /* Keep a flick inside the overlay from chaining to the page behind it. */
