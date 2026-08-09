@@ -51,8 +51,8 @@ const MINI_FAQ = [
   },
 ];
 
-const SHELF_STABLE_IDS = ['cardamom-rose', 'spiced-cookie', 'masala-namkeen', 'lemon-thyme'];
-const REFRIGERATED_IDS = ['vanilla-bean', 'tres-leches', 'tiramisu', 'pistachio-no-3'];
+const SHELF_STABLE_IDS = ['millet-nankhatai', 'rajgira-cookies', 'ny-style-millet-cookie', 'oats-cookies'];
+const REFRIGERATED_IDS = ['marble-millet-teacake', 'baklava-bundt-millet-cake', 'mocha-walnut-millet-cake', 'chocolate-butter-millet-teacake'];
 
 function productLinks(ids) {
   return ids
