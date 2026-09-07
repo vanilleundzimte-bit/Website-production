@@ -7,6 +7,11 @@ export const BUSINESS = {
   telephone: '+919599611077',
   email: 'vanilleundzimte@gmail.com',
   instagram: 'vanilleundzimte',
+  // 14-digit FSSAI licence number exactly as printed on product labels. FSSAI
+  // requires food businesses selling online to show it on the platform they
+  // sell through, so it renders in the site-wide footer and in the Bakery
+  // schema. The 17-digit FoSCoS number is an application reference, not this.
+  fssaiLicence: '22726446002459',
   city: 'Noida',
   areaServed: ['Noida', 'Delhi', 'New Delhi', 'Gurugram', 'Ghaziabad', 'Delhi NCR'],
 };

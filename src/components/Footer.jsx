@@ -77,6 +77,7 @@ export default function VZFooter() {
       </div>
       <div className="vz-footer-foot">
         <span>© 2026 vanille &amp; zimté · Noida · delivering across Delhi NCR</span>
+        <span className="vz-fssai">{`FSSAI Lic. No. ${BUSINESS.fssaiLicence}`}</span>
         <span className="vz-flourish">baked with intention <span className="vz-star">✦</span></span>
       </div>
     </footer>

@@ -25,6 +25,13 @@ export function buildBakerySchema() {
     image: `${SITE_URL}/assets/logo-mark.png`,
     priceRange: '₹₹',
     servesCuisine: 'Gluten-free bakery, plant-based desserts',
+    // schema.org has no FSSAI-specific property, so the licence rides on the
+    // generic identifier slot as a named PropertyValue.
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'FSSAI License',
+      value: BUSINESS.fssaiLicence,
+    },
     areaServed: BUSINESS.areaServed.map(name => ({ '@type': 'City', name })),
     address: {
       '@type': 'PostalAddress',

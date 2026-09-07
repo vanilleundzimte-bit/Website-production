@@ -522,6 +522,9 @@ img { display: block; max-width: 100%; }
   padding-top: 28px;
   font-size: 12px; color: var(--vz-mocha);
 }
+/* Licence digits are read off the screen and compared against a pack, so they
+   get tabular figures and a little tracking rather than the body treatment. */
+.vz-fssai { font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
 .vz-flourish { font-family: var(--vz-font-display); font-style: italic; }
 .vz-star { color: var(--vz-soft-rose); }
 
