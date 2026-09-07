@@ -6,7 +6,7 @@ export const EVIDENCE_LAST_UPDATED = '2026-08-02';
 export const EVIDENCE_PANELS = [
   {
     id: 'gluten-free-process',
-    title: 'Evidence: 100% Gluten-Free Kitchen',
+    title: 'Evidence: Gluten-Free Kitchen',
     claim: 'No wheat, barley, or rye flour is used or stored in the Noida kitchen.',
     methodology: 'All recipes are formulated from alternative flour blends (rice, almond, tapioca) from first development, rather than adapted from a wheat-based recipe.',
     source: 'Internal kitchen process, Vanille & Zimté, Noida.',

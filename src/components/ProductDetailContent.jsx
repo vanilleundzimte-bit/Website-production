@@ -84,7 +84,7 @@ export default function ProductDetailContent({ product, onAdd, longDescription, 
         </button>
       </div>
       <p className="vz-fineprint">
-        Made to order in our 100% gluten-free kitchen. Prices are indicative and confirmed on WhatsApp. Dispatched via standard courier the next business day — courier charges apply on orders below ₹1000.
+        Made to order in our gluten-free kitchen. Prices are indicative and confirmed on WhatsApp. Dispatched via standard courier the next business day — courier charges apply on orders below ₹1000.
       </p>
     </div>
   );

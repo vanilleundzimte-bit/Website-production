@@ -69,10 +69,10 @@ export const FAQ_ITEMS = [
   },
   {
     slug: 'gluten-free-kitchen-cross-contamination',
-    question: 'Is the kitchen 100% gluten-free, or shared with wheat?',
-    answer: 'Vanille & Zimté operates a 100% gluten-free kitchen in Noida — no wheat flour is used or stored on-site, so there is no cross-contamination risk from a shared gluten production line.',
+    question: 'Is the kitchen gluten-free, or shared with wheat?',
+    answer: 'Vanille & Zimté operates a gluten-free kitchen in Noida — no wheat flour is used or stored on-site, so there is no cross-contamination risk from a shared gluten production line.',
     datePublished: '2026-07-08',
-    dateModified: '2026-07-08',
+    dateModified: '2026-09-07',
   },
   {
     slug: 'mixed-assorted-gifting-boxes',

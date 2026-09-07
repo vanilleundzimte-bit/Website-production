@@ -30,7 +30,7 @@ export default function VZHero() {
           </div>
           <div className="vz-hero-marks">
             <span><Leaf size={18} /> 100% plant-based</span>
-            <span><Cake size={18} /> 100% gluten-free kitchen</span>
+            <span><Cake size={18} /> gluten-free kitchen</span>
             <span><FlowerLotus size={18} /> dairy-free options</span>
           </div>
         </div>
