@@ -63,9 +63,9 @@ export const FAQ_ITEMS = [
   {
     slug: 'price-range-bulk-party-gifting',
     question: 'What is the price range for bulk party gifting?',
-    answer: 'Bulk gifting is priced per box, typically from ₹351 for a single-item favour box up to ₹1,201 for a mixed premium hamper, plus courier and handling. Final pricing depends on quantity and product mix, confirmed on WhatsApp.',
+    answer: 'Bulk gifting is priced per guest box — packaging plus a selection, not a single 200g pack — typically from ₹351 for a single-item favour box up to ₹1,201 for a mixed premium hamper, plus courier and handling. Individual pack prices are listed on each product page. Final pricing depends on quantity and product mix, confirmed on WhatsApp.',
     datePublished: '2026-07-08',
-    dateModified: '2026-08-02',
+    dateModified: '2026-09-06',
   },
   {
     slug: 'gluten-free-kitchen-cross-contamination',

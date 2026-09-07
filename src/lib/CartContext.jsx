@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { whatsappUrl } from './whatsapp';
-import { getFixedWeight } from './productMeta';
+import { formatINR, getPrice, getPackWeight, cartTotal } from './pricing';
 
 const CartContext = createContext(null);
 
@@ -16,16 +16,30 @@ function nextLineId() {
   return `line-${Date.now()}-${lineCounter}`;
 }
 
+// Price goes last on each line so the money lands in a consistent place in the
+// WhatsApp bubble, and reuses the same ASCII "- " separator as the dairy-free and
+// note modifiers rather than an em dash, which costs 9 characters once
+// percent-encoded into the wa.me URL.
 function buildEnquiryMessage(cart) {
   const lines = cart.map(item => {
-    const weight = getFixedWeight(item.product.cat);
+    const weight = getPackWeight(item.product);
+    const price = getPrice(item.product);
     const parts = [`${item.qty}x ${item.product.name}`];
     if (weight) parts.push(`(${weight})`);
     if (item.dairyFree) parts.push('- dairy-free');
     if (item.notes) parts.push(`- note: "${item.notes}"`);
+    if (price !== null) parts.push(`- ${formatINR(price)} each = ${formatINR(price * item.qty)}`);
     return `• ${parts.join(' ')}`;
   }).join('\n');
-  return `Hi Vanille & Zimté! I'd like to enquire about:\n${lines}\n\nCould you share availability and pricing?`;
+
+  // Same rule as the cart's total row: quote a total only when every line has a
+  // price, so the figure can never be short of an item.
+  const { total, allPriced } = cartTotal(cart);
+  const totalLine = allPriced && total > 0
+    ? `\n\nEstimated total: ${formatINR(total)} (excl. courier)`
+    : '';
+
+  return `Hi Vanille & Zimté! I'd like to enquire about:\n${lines}${totalLine}\n\nCould you confirm availability and the final total?`;
 }
 
 export function CartProvider({ children }) {

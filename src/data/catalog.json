@@ -15,7 +15,7 @@
       "mfgCostPer200g": 47.67,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1012.93,
-      "suggestedMrpPer200g": 202.59
+      "suggestedMrpPer200g": 299
     },
     {
       "id": "baklava-bundt-millet-cake",
@@ -30,7 +30,7 @@
       "mfgCostPer200g": 85.67,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1820.45,
-      "suggestedMrpPer200g": 364.09
+      "suggestedMrpPer200g": 399
     },
     {
       "id": "mocha-walnut-millet-cake",
@@ -45,7 +45,7 @@
       "mfgCostPer200g": 88.41,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1878.77,
-      "suggestedMrpPer200g": 375.75
+      "suggestedMrpPer200g": 399
     },
     {
       "id": "pineapple-upside-down-millet-te",
@@ -60,7 +60,7 @@
       "mfgCostPer200g": 65.09,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1383.23,
-      "suggestedMrpPer200g": 276.65
+      "suggestedMrpPer200g": 349
     },
     {
       "id": "chocolate-butter-millet-teacake",
@@ -75,7 +75,7 @@
       "mfgCostPer200g": 58.32,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1239.22,
-      "suggestedMrpPer200g": 247.84
+      "suggestedMrpPer200g": 299
     },
     {
       "id": "vanilla-butter-millet-teacake",
@@ -90,7 +90,7 @@
       "mfgCostPer200g": 50.64,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1076.05,
-      "suggestedMrpPer200g": 215.21
+      "suggestedMrpPer200g": 299
     },
     {
       "id": "millet-nankhatai",
@@ -105,7 +105,7 @@
       "mfgCostPer200g": 55.53,
       "tier": "Tier A",
       "suggestedMrpPerKg": 902.3,
-      "suggestedMrpPer200g": 180.46
+      "suggestedMrpPer200g": 239
     },
     {
       "id": "rajgira-cookies",
@@ -120,7 +120,7 @@
       "mfgCostPer200g": 105.36,
       "tier": "Tier A",
       "suggestedMrpPerKg": 1712.12,
-      "suggestedMrpPer200g": 342.42
+      "suggestedMrpPer200g": 419
     },
     {
       "id": "ny-style-millet-cookie",
@@ -135,7 +135,7 @@
       "mfgCostPer200g": 126.38,
       "tier": "Tier A",
       "suggestedMrpPerKg": 2053.64,
-      "suggestedMrpPer200g": 410.73
+      "suggestedMrpPer200g": 419
     },
     {
       "id": "oats-cookies",
@@ -150,7 +150,7 @@
       "mfgCostPer200g": 68.11,
       "tier": "Tier A",
       "suggestedMrpPerKg": 1106.79,
-      "suggestedMrpPer200g": 221.36
+      "suggestedMrpPer200g": 279
     },
     {
       "id": "mini-butter-millet-cookies",
@@ -165,7 +165,7 @@
       "mfgCostPer200g": 80.78,
       "tier": "Tier A",
       "suggestedMrpPerKg": 1312.63,
-      "suggestedMrpPer200g": 262.53
+      "suggestedMrpPer200g": 329
     },
     {
       "id": "date-choco-sauce",
@@ -180,7 +180,7 @@
       "mfgCostPer200g": 59.43,
       "tier": "Tier B",
       "suggestedMrpPerKg": 1262.87,
-      "suggestedMrpPer200g": 252.57
+      "suggestedMrpPer200g": 50
     }
   ],
   "reviewFlags": [

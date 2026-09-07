@@ -36,7 +36,7 @@ export function buildBakerySchema() {
 }
 
 export function buildProductSchema(product, { url, description } = {}) {
-  return {
+  const schema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
@@ -45,6 +45,30 @@ export function buildProductSchema(product, { url, description } = {}) {
     url,
     brand: { '@type': 'Brand', name: BUSINESS.name },
   };
+
+  if (product.weight) {
+    schema.weight = {
+      '@type': 'QuantitativeValue',
+      value: parseInt(product.weight, 10),
+      unitCode: 'GRM',
+    };
+  }
+
+  // schema.org wants the price unformatted — a bare number, no symbol and no
+  // separators — so this deliberately does not go through formatINR. seller
+  // points at the Bakery node root.jsx already emits on every page.
+  if (Number.isFinite(product.price) && product.price > 0) {
+    schema.offers = {
+      '@type': 'Offer',
+      url,
+      priceCurrency: 'INR',
+      price: String(Math.round(product.price)),
+      availability: 'https://schema.org/InStock',
+      seller: { '@id': `${SITE_URL}/#business` },
+    };
+  }
+
+  return schema;
 }
 
 export function buildFaqSchema(items) {

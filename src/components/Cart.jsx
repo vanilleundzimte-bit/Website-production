@@ -1,11 +1,12 @@
 import { X, ShoppingBag } from '@phosphor-icons/react';
-import { getFixedWeight } from '../lib/productMeta';
+import { formatINR, getPackWeight, lineTotal, cartTotal } from '../lib/pricing';
 import useScrollLock from '../lib/useScrollLock';
 import QuantityStepper from './QuantityStepper';
 
 export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryUrl }) {
   useScrollLock();
   const totalCount = items.reduce((sum, item) => sum + item.qty, 0);
+  const { total, allPriced } = cartTotal(items);
 
   return (
     <div className="vz-cart-pane" onClick={onClose}>
@@ -27,7 +28,8 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
         ) : (
           <ul className="vz-cart-list">
             {items.map(item => {
-              const weight = getFixedWeight(item.product.cat);
+              const weight = getPackWeight(item.product);
+              const sub = lineTotal(item);
               return (
                 <li key={item.lineId} className="vz-cart-item">
                   <div className="vz-cart-thumb" style={{ background: item.product.color }}>
@@ -47,9 +49,12 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
                     {item.notes && <span className="vz-cart-note">"{item.notes}"</span>}
                     <div className="vz-cart-item-controls">
                       <QuantityStepper value={item.qty} onChange={q => onUpdateQty(item.lineId, q)} />
-                      <button className="vz-link-btn vz-cart-remove" onClick={() => onRemove(item.lineId)}>
-                        Remove
-                      </button>
+                      <div className="vz-cart-line-end">
+                        {sub !== null && <span className="vz-price vz-price-sm">{formatINR(sub)}</span>}
+                        <button className="vz-link-btn vz-cart-remove" onClick={() => onRemove(item.lineId)}>
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -59,10 +64,18 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
         )}
 
         <footer className="vz-cart-foot">
+          {/* Suppressed unless every line has a price — a total that silently leaves
+              an item out is worse than no total at all. */}
+          {items.length > 0 && allPriced && (
+            <div className="vz-cart-total">
+              <span className="vz-eyebrow vz-tight">Estimated total</span>
+              <span className="vz-cart-total-value">{formatINR(total)}</span>
+            </div>
+          )}
           <p className="vz-fineprint">
             {items.length === 0
-              ? 'We’ll confirm availability, delivery and pricing over WhatsApp.'
-              : `${totalCount} item${totalCount > 1 ? 's' : ''} in your box — we’ll confirm availability, delivery and pricing over WhatsApp.`}
+              ? 'Prices are per 200g pack. We’ll confirm availability and delivery over WhatsApp.'
+              : `${totalCount} item${totalCount > 1 ? 's' : ''} in your box. Estimated from list prices, before courier — we’ll confirm the final total on WhatsApp.`}
           </p>
           {enquiryUrl ? (
             <a

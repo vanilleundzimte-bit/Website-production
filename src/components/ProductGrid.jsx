@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { ArrowRight } from '@phosphor-icons/react';
 import { VZ_DATA } from '../data/products';
+import { formatINR, getPrice, getPackWeight } from '../lib/pricing';
 
 function VZProductCard({ product, onOpen }) {
+  const price = getPrice(product);
+
   return (
     <article className="vz-card" onClick={() => onOpen(product)}>
       <div className="vz-card-img" style={{ background: product.color }}>
@@ -30,6 +33,12 @@ function VZProductCard({ product, onOpen }) {
         </h3>
         <p className="vz-card-blurb">{product.blurb || ''}</p>
         <div className="vz-card-foot">
+          {price !== null && (
+            <span className="vz-price">
+              {formatINR(price)}
+              <span className="vz-price-unit"> / {getPackWeight(product)}</span>
+            </span>
+          )}
           <button
             className="vz-link-btn"
             onClick={e => { e.stopPropagation(); onOpen(product); }}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ShoppingBag } from '@phosphor-icons/react';
-import { getFixedWeight } from '../lib/productMeta';
+import { formatINR, getPrice, getPackWeight } from '../lib/pricing';
 import Checkbox from './Checkbox';
 import QuantityStepper from './QuantityStepper';
 
@@ -12,12 +12,20 @@ export default function ProductDetailContent({ product, onAdd, longDescription, 
   const [dairyFree, setDairyFree] = useState(false);
   const [notes, setNotes] = useState('');
 
-  const weight = getFixedWeight(product.cat);
+  const weight = getPackWeight(product);
+  const price = getPrice(product);
+  const subtotal = price === null ? null : price * qty;
 
   return (
     <div className="vz-modal-body">
       <span className="vz-eyebrow">{product.cat}</span>
       <TitleTag className="vz-modal-title">{product.name}</TitleTag>
+      {price !== null && (
+        <p className="vz-price vz-price-lg">
+          {formatINR(price)}
+          <span className="vz-price-unit"> / {weight} pack</span>
+        </p>
+      )}
       <p className="vz-modal-blurb">{longDescription || product.blurb || ''}</p>
 
       <div className="vz-modal-tags">
@@ -55,7 +63,19 @@ export default function ProductDetailContent({ product, onAdd, longDescription, 
         <QuantityStepper value={qty} onChange={setQty} />
       </div>
 
+      {/* The running subtotal sits inside the foot, not up beside the stepper: the
+          foot goes sticky under 960px, so on a phone the total stays pinned next to
+          the CTA instead of scrolling away with the quantity row. */}
       <div className="vz-modal-foot">
+        {subtotal !== null && (
+          <div className="vz-modal-subtotal">
+            <span className="vz-eyebrow vz-tight">Subtotal</span>
+            <span className="vz-price">
+              {formatINR(subtotal)}
+              {qty > 1 && <span className="vz-price-unit"> · {qty} × {formatINR(price)}</span>}
+            </span>
+          </div>
+        )}
         <button
           className="vz-btn vz-btn-primary vz-btn-block"
           onClick={() => onAdd({ product, qty, dairyFree, notes })}
@@ -64,7 +84,7 @@ export default function ProductDetailContent({ product, onAdd, longDescription, 
         </button>
       </div>
       <p className="vz-fineprint">
-        Made to order in our 100% gluten-free kitchen. Dispatched via standard courier the next business day — courier charges apply on orders below ₹1000.
+        Made to order in our 100% gluten-free kitchen. Prices are indicative and confirmed on WhatsApp. Dispatched via standard courier the next business day — courier charges apply on orders below ₹1000.
       </p>
     </div>
   );

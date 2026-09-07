@@ -119,7 +119,7 @@ export default function BulkPartyGiftingRoute() {
           <span className="vz-eyebrow" style={{ color: 'var(--vz-cinnamon-text)' }}>price ranges</span>
           <h2 className="vz-section-title">Illustrative <em>bulk pricing.</em></h2>
           <p className="vz-section-lede">
-            Final pricing depends on quantity and product mix — these tiers give a sense of range before you confirm on WhatsApp.
+            These are per-guest gift boxes — packaging and a mixed selection, not the single 200g packs priced on each product page. Final pricing depends on quantity and product mix; these tiers give a sense of range before you confirm on WhatsApp.
           </p>
         </div>
         <div className="vz-price-table-wrap">

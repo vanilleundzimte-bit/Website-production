@@ -415,7 +415,7 @@ img { display: block; max-width: 100%; }
 }
 
 .vz-modal-foot {
-  display: flex; align-items: center;
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px;
   padding-top: 12px; border-top: 1px solid var(--vz-border);
 }
 
@@ -842,6 +842,50 @@ a.vz-btn { text-decoration: none; }
 .vz-price-table tbody tr:last-child td { border-bottom: none; }
 .vz-price-table td:first-child { font-weight: 600; color: var(--vz-brand); }
 .vz-price-table-wrap { max-width: 1240px; margin: 0 auto; overflow-x: auto; }
+
+/* ---------- PRICE TAGS ---------- */
+/* Prices are numerals, not prose: body font with tabular figures so a column of
+   them lines up, and nowrap so "₹1,196" never breaks across the symbol. */
+.vz-price {
+  font-family: var(--vz-font-body);
+  font-size: 15px; font-weight: 600; line-height: 1.2;
+  letter-spacing: var(--vz-tracking-tight);
+  color: var(--vz-brand);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.vz-price-unit {
+  font-size: 11.5px; font-weight: 400; letter-spacing: 0;
+  color: var(--vz-mocha);
+}
+.vz-price-sm { font-size: 13.5px; }
+.vz-price-lg { font-size: 22px; margin: 0; }
+
+/* The card foot stays justify-content: flex-end and the price is pushed left by
+   auto margin, so a product with no price leaves "Add to box" exactly where it
+   already sits — space-between would slide it to the left edge instead. */
+.vz-card-foot .vz-price { margin-right: auto; }
+
+.vz-modal-subtotal {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+}
+
+/* Cart line: price stacked above Remove, both hard right, so the money reads as
+   one column down the drawer and the stepper keeps its half of the row. */
+.vz-cart-line-end {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+}
+
+.vz-cart-total {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--vz-border);
+}
+.vz-cart-total-value {
+  font-family: var(--vz-font-body);
+  font-size: 20px; font-weight: 600; color: var(--vz-brand);
+  letter-spacing: var(--vz-tracking-tight);
+  font-variant-numeric: tabular-nums;
+}
 
 /* ---------- PRODUCT PAGE ---------- */
 .vz-product-page {
