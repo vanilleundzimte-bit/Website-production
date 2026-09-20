@@ -123,19 +123,19 @@
       "suggestedMrpPer200g": 419
     },
     {
-      "id": "ny-style-millet-cookie",
-      "sourceSheet": "NY Style Millet Cookie",
+      "id": "jowar-chocochip-cookies",
+      "sourceSheet": "Jowar Chocochip Cookies",
       "block": "primary",
-      "titleRaw": "NY Style Millet Cookie",
-      "displayNameGuess": "NY Style Millet Cookie",
+      "titleRaw": "Jowar Chocochip Cookies",
+      "displayNameGuess": "Jowar Chocochip Cookies",
       "batchWeightNote": null,
       "mfgCostBatch": 296.99,
       "batchYieldG": 470,
       "mfgCostPerKg": 631.89,
       "mfgCostPer200g": 126.38,
       "tier": "Tier A",
-      "suggestedMrpPerKg": 2053.64,
-      "suggestedMrpPer200g": 419
+      "suggestedMrpPerKg": 1645,
+      "suggestedMrpPer200g": 329
     },
     {
       "id": "oats-cookies",

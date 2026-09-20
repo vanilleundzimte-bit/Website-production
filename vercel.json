@@ -1,5 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/shop/ny-style-millet-cookie",
+      "destination": "/shop/jowar-chocochip-cookies",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

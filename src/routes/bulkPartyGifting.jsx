@@ -51,7 +51,7 @@ const MINI_FAQ = [
   },
 ];
 
-const SHELF_STABLE_IDS = ['millet-nankhatai', 'rajgira-cookies', 'ny-style-millet-cookie', 'oats-cookies'];
+const SHELF_STABLE_IDS = ['millet-nankhatai', 'rajgira-cookies', 'jowar-chocochip-cookies', 'oats-cookies'];
 const REFRIGERATED_IDS = ['marble-millet-teacake', 'baklava-bundt-millet-cake', 'mocha-walnut-millet-cake', 'chocolate-butter-millet-teacake'];
 
 function productLinks(ids) {

@@ -113,17 +113,17 @@ export const VZ_DATA = {
       "photo": "/products/rajgira-cookies.jpg"
     },
     {
-      "id": "ny-style-millet-cookie",
-      "name": "NY Style Millet Cookie",
+      "id": "jowar-chocochip-cookies",
+      "name": "Jowar Chocochip Cookies",
       "cat": "Cookie",
-      "price": 419,
+      "price": 329,
       "weight": "200g",
-      "blurb": "Thick, chunky and loaded with 70% dark chocolate, a New York-style cookie rebuilt on jowar millet flour, rich with cocoa's natural antioxidants.",
+      "blurb": "Bite-sized chocolate chip cookies on a wholesome jowar millet base, naturally gluten-free, with jowar's gentle fibre in every crisp little bite.",
       "tags": [
         "GF"
       ],
       "color": "var(--vz-vanilla)",
-      "photo": "/products/ny-style-millet-cookie.jpg"
+      "photo": "/products/jowar-chocochip-cookies.jpg"
     },
     {
       "id": "oats-cookies",
