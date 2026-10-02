@@ -28,7 +28,7 @@ export const EVIDENCE_PANELS = [
     claim: 'Bulk and party orders are delivered across Noida, Delhi, Gurugram, and Ghaziabad from the Noida kitchen.',
     methodology: 'Delivery via standard courier partners, dispatched the next business day after order confirmation; bulk/event orders scheduled to a specific delivery date on request.',
     source: 'Internal delivery/courier arrangement, Vanille & Zimté.',
-    date: '2026-07-08',
-    limitations: 'Courier charges apply on orders below ₹1000; exact delivery windows for a given pin code are confirmed on WhatsApp before the order is finalised.',
+    date: '2026-10-02',
+    limitations: 'Courier charges apply on orders below ₹2000; exact delivery windows for a given pin code are confirmed on WhatsApp before the order is finalised.',
   },
 ];
