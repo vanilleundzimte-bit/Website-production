@@ -1,5 +1,5 @@
 import { X, ShoppingBag } from '@phosphor-icons/react';
-import { formatINR, getPackWeight, lineTotal, cartTotal } from '../lib/pricing';
+import { formatINR, lineWeight, lineAddOn, lineUnitPrice, lineTotal, cartTotal } from '../lib/pricing';
 import useScrollLock from '../lib/useScrollLock';
 import QuantityStepper from './QuantityStepper';
 
@@ -28,7 +28,9 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
         ) : (
           <ul className="vz-cart-list">
             {items.map(item => {
-              const weight = getPackWeight(item.product);
+              const weight = lineWeight(item);
+              const addOn = lineAddOn(item);
+              const unit = lineUnitPrice(item);
               const sub = lineTotal(item);
               return (
                 <li key={item.lineId} className="vz-cart-item">
@@ -44,6 +46,9 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
                     <span className="vz-cart-name">{item.product.name}</span>
                     <div className="vz-cart-tags">
                       {weight && <span className="vz-tag-mini">{weight}</span>}
+                      {/* Abbreviated: the pill is small-caps with wide tracking, and the
+                          full label runs about as wide as the other two combined. */}
+                      {addOn && <span className="vz-tag-mini">+ Date sauce</span>}
                       {item.dairyFree && <span className="vz-tag-mini">Dairy-free</span>}
                     </div>
                     {item.notes && <span className="vz-cart-note">"{item.notes}"</span>}
@@ -51,6 +56,11 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
                       <QuantityStepper value={item.qty} onChange={q => onUpdateQty(item.lineId, q)} />
                       <div className="vz-cart-line-end">
                         {sub !== null && <span className="vz-price vz-price-sm">{formatINR(sub)}</span>}
+                        {/* The unit breakdown, so a multi-pack line with sauce can be
+                            reconciled against the "From ₹299" on the card it came from. */}
+                        {sub !== null && item.qty > 1 && (
+                          <span className="vz-price-unit">{item.qty} × {formatINR(unit)}</span>
+                        )}
                         <button className="vz-link-btn vz-cart-remove" onClick={() => onRemove(item.lineId)}>
                           Remove
                         </button>
@@ -74,7 +84,7 @@ export default function VZCart({ items, onClose, onRemove, onUpdateQty, enquiryU
           )}
           <p className="vz-fineprint">
             {items.length === 0
-              ? 'Prices are per 200g pack. We’ll confirm availability and delivery over WhatsApp.'
+              ? 'Teacakes come in 200g, 350g and 500g; cookies in 200g packs. We’ll confirm availability and delivery over WhatsApp.'
               : `${totalCount} item${totalCount > 1 ? 's' : ''} in your box. Estimated from list prices, before courier — we’ll confirm the final total on WhatsApp.`}
           </p>
           {enquiryUrl ? (

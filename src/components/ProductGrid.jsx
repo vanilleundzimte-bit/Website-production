@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { ArrowRight } from '@phosphor-icons/react';
 import { VZ_DATA } from '../data/products';
-import { formatINR, getPrice, getPackWeight } from '../lib/pricing';
+import { formatINR, getPrice, getPackWeight, getPackSizes } from '../lib/pricing';
 
 function VZProductCard({ product, onOpen }) {
   const price = getPrice(product);
+  // A product sold in several packs quotes its cheapest as "From ₹299" rather than
+  // pinning a weight the modal may immediately change. Derived from the record, so the
+  // prerendered card and the first client render agree.
+  const multiSize = getPackSizes(product).length > 1;
 
   return (
     <article className="vz-card" onClick={() => onOpen(product)}>
@@ -35,8 +39,11 @@ function VZProductCard({ product, onOpen }) {
         <div className="vz-card-foot">
           {price !== null && (
             <span className="vz-price">
-              {formatINR(price)}
-              <span className="vz-price-unit"> / {getPackWeight(product)}</span>
+              {multiSize ? (
+                <><span className="vz-price-unit">From </span>{formatINR(price)}</>
+              ) : (
+                <>{formatINR(price)}<span className="vz-price-unit"> / {getPackWeight(product)}</span></>
+              )}
             </span>
           )}
           <button

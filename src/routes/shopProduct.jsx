@@ -63,6 +63,7 @@ export default function ShopProductRoute() {
         </div>
         <div>
           <ProductDetailContent
+            key={product.id}
             product={product}
             longDescription={extra?.description}
             onAdd={addToCart}

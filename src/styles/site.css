@@ -705,6 +705,7 @@ img { display: block; max-width: 100%; }
   .vz-stepper { gap: 12px; padding: 5px 7px; }
   .vz-link-btn { padding: 12px 0; }
   .vz-chip { padding: 11px 18px; }
+  .vz-segmented button { padding: 13px 18px; }
   .vz-modal-close { width: 44px; height: 44px; }
   .vz-breadcrumbs a { padding: 6px 0; }
   .vz-field input, .vz-field select, .vz-newsletter-field input { min-height: 44px; }

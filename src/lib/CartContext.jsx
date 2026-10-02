@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { whatsappUrl } from './whatsapp';
-import { formatINR, getPrice, getPackWeight, cartTotal } from './pricing';
+import { formatINR, lineWeight, lineAddOn, lineUnitPrice, cartTotal } from './pricing';
 
 const CartContext = createContext(null);
 
@@ -17,15 +17,19 @@ function nextLineId() {
 }
 
 // Price goes last on each line so the money lands in a consistent place in the
-// WhatsApp bubble, and reuses the same ASCII "- " separator as the dairy-free and
-// note modifiers rather than an em dash, which costs 9 characters once
-// percent-encoded into the wa.me URL.
+// WhatsApp bubble, and reuses the same ASCII "- " separator as the dairy-free, note
+// and add-on modifiers rather than an em dash, which costs 9 characters once
+// percent-encoded into the wa.me URL. The trailing price is add-on inclusive.
 function buildEnquiryMessage(cart) {
   const lines = cart.map(item => {
-    const weight = getPackWeight(item.product);
-    const price = getPrice(item.product);
+    const weight = lineWeight(item);
+    const addOn = lineAddOn(item);
+    const price = lineUnitPrice(item);
     const parts = [`${item.qty}x ${item.product.name}`];
     if (weight) parts.push(`(${weight})`);
+    // The add-on sits with the pack size, ahead of the modifiers: together they say
+    // what is actually in the box.
+    if (addOn) parts.push(`- with ${addOn.label.toLowerCase()} (${addOn.weight})`);
     if (item.dairyFree) parts.push('- dairy-free');
     if (item.notes) parts.push(`- note: "${item.notes}"`);
     if (price !== null) parts.push(`- ${formatINR(price)} each = ${formatINR(price * item.qty)}`);

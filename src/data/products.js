@@ -6,14 +6,27 @@
 // catalog.json also carries per-batch manufacturing cost and margin, and this
 // module is bundled into the browser (ssr: false), so importing it anywhere under
 // src/ would ship the cost of goods to every visitor. Move the two together.
+//
+// `packSizes` lists the gram weights a product is sold in, smallest first, and the
+// first entry must equal `weight`. Only `price` is authored: the larger sizes are
+// derived per-gram in src/lib/pricing.js, so editing `price` moves every size at
+// once and the figures can never drift apart. Grams are numbers, not '350g'
+// strings — a weight written as prose is a weight no arithmetic can use.
+//
+// `addOn` names an entry in pricing.js's add-on table, opting this product in. It
+// sits on the record rather than being inferred from `cat` for the same reason
+// `weight` does: a category-keyed lookup silently matches nothing the day a
+// category name drifts.
 export const VZ_DATA = {
   "products": [
     {
       "id": "marble-millet-teacake",
       "name": "Marble Millet Teacake",
       "cat": "Teacake",
-      "price": 299,
+      "price": 165,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "Vanilla and cocoa batter swirled together and baked into a tender jowar-millet teacake, naturally gluten-free and lightly fibre-rich in every marbled slice.",
       "tags": [
         "GF"
@@ -25,8 +38,10 @@ export const VZ_DATA = {
       "id": "baklava-bundt-millet-cake",
       "name": "Baklava Bundt Millet Cake",
       "cat": "Teacake",
-      "price": 399,
+      "price": 293,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "Walnuts, pistachios and honey baked into a jowar-millet bundt, baklava-inspired, with the natural protein and good fats of walnuts and pistachios in every slice.",
       "tags": [
         "GF"
@@ -38,8 +53,10 @@ export const VZ_DATA = {
       "id": "mocha-walnut-millet-cake",
       "name": "Mocha Walnut Millet Cake",
       "cat": "Teacake",
-      "price": 399,
+      "price": 296,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "Espresso and 70% dark chocolate meet toasted walnuts in this ragi-and-millet teacake, rich with cocoa's antioxidants and calcium-rich ragi.",
       "tags": [
         "GF"
@@ -51,8 +68,10 @@ export const VZ_DATA = {
       "id": "pineapple-upside-down-millet-te",
       "name": "Pineapple Upside-Down Millet Teacake",
       "cat": "Teacake",
-      "price": 349,
+      "price": 225,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "A caramelised fruit crown over a coconut-and-jowar millet teacake, made tender with coconut oil and almond flour's natural good fats.",
       "tags": [
         "GF"
@@ -64,8 +83,10 @@ export const VZ_DATA = {
       "id": "chocolate-butter-millet-teacake",
       "name": "Chocolate Butter Millet Teacake",
       "cat": "Teacake",
-      "price": 299,
+      "price": 202,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "A classic butter teacake deepened with real cocoa on a base of wholesome jowar millet flour, naturally gluten-free and gently fibre-rich.",
       "tags": [
         "GF"
@@ -77,8 +98,10 @@ export const VZ_DATA = {
       "id": "vanilla-butter-millet-teacake",
       "name": "Vanilla Butter Millet Teacake",
       "cat": "Teacake",
-      "price": 299,
+      "price": 175,
       "weight": "200g",
+      "packSizes": [200, 350, 500],
+      "addOn": "date-choco-sauce",
       "blurb": "A simple, buttery vanilla teacake built on wholesome jowar millet flour, naturally gluten-free, with curd's gentle probiotic warmth folded in.",
       "tags": [
         "GF"
@@ -90,7 +113,7 @@ export const VZ_DATA = {
       "id": "millet-nankhatai",
       "name": "Millet Nankhatai",
       "cat": "Cookie",
-      "price": 239,
+      "price": 189,
       "weight": "200g",
       "blurb": "A cardamom-scented nankhatai remade with jowar millet and besan, ghee-rich and gluten-free, with besan's natural protein in every crumbly bite.",
       "tags": [
@@ -103,7 +126,7 @@ export const VZ_DATA = {
       "id": "rajgira-cookies",
       "name": "Rajgira Cookies",
       "cat": "Cookie",
-      "price": 419,
+      "price": 311,
       "weight": "200g",
       "blurb": "Buttery cardamom cookies built on rajgira, the ancient amaranth grain naturally rich in protein and iron, finished with nutty almond flour.",
       "tags": [
@@ -116,7 +139,7 @@ export const VZ_DATA = {
       "id": "jowar-chocochip-cookies",
       "name": "Jowar Chocochip Cookies",
       "cat": "Cookie",
-      "price": 329,
+      "price": 276,
       "weight": "200g",
       "blurb": "Bite-sized chocolate chip cookies on a wholesome jowar millet base, naturally gluten-free, with jowar's gentle fibre in every crisp little bite.",
       "tags": [
@@ -129,7 +152,7 @@ export const VZ_DATA = {
       "id": "oats-cookies",
       "name": "Oats Cookies",
       "cat": "Cookie",
-      "price": 279,
+      "price": 239,
       "weight": "200g",
       "blurb": "A wholesome oat cookie studded with toasted walnuts and a mix of seeds on a jowar millet base, warmed with cinnamon and full of oats' natural fibre.",
       "tags": [
@@ -142,7 +165,7 @@ export const VZ_DATA = {
       "id": "mini-butter-millet-cookies",
       "name": "Mini Butter Millet Cookies",
       "cat": "Cookie",
-      "price": 329,
+      "price": 283,
       "weight": "200g",
       "blurb": "Bite-sized butter cookies laced with cocoa, coffee and toasted walnuts on a jowar-besan base, naturally gluten-free and full of flavour in every little bite.",
       "tags": [
