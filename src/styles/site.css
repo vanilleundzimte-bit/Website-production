@@ -341,6 +341,13 @@ img { display: block; max-width: 100%; }
   background: var(--vz-cream);
   border-radius: 20px; overflow: hidden;
   display: grid; grid-template-columns: 1.05fr 1fr;
+  /* The single implicit row would be `auto`, and grid auto rows size to their content
+     and do not shrink to fit a constrained container — so the body row kept its full
+     height, max-height capped the modal, and overflow:hidden clipped everything below
+     the notes field with no way to scroll to it. minmax(0, 1fr) lets the row shrink
+     below its content and hands scrolling to .vz-modal-body's overflow-y. The <=960px
+     block does the same for its two stacked rows. */
+  grid-template-rows: minmax(0, 1fr);
   width: 100%; max-width: 920px; max-height: 92vh;
   box-shadow: var(--vz-shadow-lg);
   animation: vz-rise-in 320ms var(--vz-ease-out);
@@ -414,9 +421,15 @@ img { display: block; max-width: 100%; }
   border-color: var(--vz-soft-rose); box-shadow: 0 0 0 3px rgba(208,142,160,0.18);
 }
 
+/* Sticky at every width, not just on phones: now that the body scrolls on desktop
+   too, an unpinned CTA is something the customer has to go looking for. margin-top
+   is inert when the body is taller than its row, which is the common case. */
 .vz-modal-foot {
   display: flex; flex-direction: column; align-items: stretch; gap: 12px;
   padding-top: 12px; border-top: 1px solid var(--vz-border);
+  position: sticky; bottom: 0;
+  background: var(--vz-cream);
+  margin-top: auto;
 }
 
 /* ---------- CART PANE ---------- */
@@ -730,14 +743,6 @@ img { display: block; max-width: 100%; }
     grid-template-rows: auto minmax(0, 1fr);
   }
   .vz-modal-art { min-height: 200px; }
-
-  /* Keep the primary action on screen while the details scroll behind it, so the
-     CTA is never something the customer has to go looking for. */
-  .vz-modal-foot {
-    position: sticky; bottom: 0;
-    background: var(--vz-cream);
-    margin-top: auto;
-  }
 }
 /* Short viewports (landscape, or a phone with the browser chrome showing) need the
    photo to give up more room than the body. */
