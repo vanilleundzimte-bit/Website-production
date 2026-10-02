@@ -1,0 +1,11 @@
+# Cloudflare Pages equivalent of vercel.json's "redirects" block, plus an SPA fallback.
+# Rules are matched in order, so the specific redirect has to precede the catch-all.
+
+# The product was renamed in commit 0476161; this keeps the old URL working.
+/shop/ny-style-millet-cookie  /shop/jowar-chocochip-cookies  301
+
+# Every real route is prerendered to its own index.html and is served as a static asset
+# before this file is consulted, so this only catches a URL matching no file - an unknown
+# /shop/<id>, a mistyped path. Those get the client shell with a 200 so the app's own
+# router renders its "not found" view rather than Cloudflare's default error page.
+/*  /__spa-fallback.html  200
